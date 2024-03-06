@@ -126,33 +126,3 @@ def visualize(model, device, loader):
         Image.fromarray(decode_target).save('results/test_target_{}.png'.format(i))
         Image.fromarray(decode_pred).save('results/test_pred_{}.png'.format(i))
 
-def visualizeVainF(model, device, loader):
-    denorm = utils.Denormalize(mean=[0.485, 0.456, 0.406],
-                            std=[0.229, 0.224, 0.225])
-
-    model.eval()
-    model.to(device)
-    with torch.no_grad():
-        images, labels = next(iter(loader))
-
-        images = images.to(device, dtype=torch.float32)
-        labels = labels.to(device, dtype=torch.long)
-
-        output = model(images)
-
-        preds = output.detach().max(dim=1)[1].cpu().numpy()
-        targets = labels.cpu().numpy()
-
-    for i in range(len(images)):
-        image = images[i].detach().cpu().numpy()
-        target = targets[i]
-        pred = preds[i]
-
-        image = (denorm(image) * 255).transpose(1, 2, 0).astype(np.uint8)
-        decode_target = loader.dataset.decode_target(target).astype(np.uint8)
-        decode_pred = loader.dataset.decode_target(pred).astype(np.uint8)
-
-        Image.fromarray(image).save('results/test_image_{}.png'.format(i))
-        Image.fromarray(decode_target).save('results/test_target_{}.png'.format(i))
-        Image.fromarray(decode_pred).save('results/test_pred_{}.png'.format(i))
-
