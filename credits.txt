@@ -1,0 +1,3 @@
+Die Ordner model, network, utils sind Inhalte von Gongfan Fang (siehe LICENSE und https://github.com/VainF/DeepLabV3Plus-Pytorch).
+Codeinhalte für das Trainieren der Moellde orientieren sich an den Inhalten von Gongfan Fang.
+Codeinhalte für das Anwenden des DUA Algorithmus orientieren sich an der originalen Implementation von Mirza et al. (https://github.com/jmiemirza/DUA).
